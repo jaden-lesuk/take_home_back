@@ -20,5 +20,9 @@ def get_weather():
     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&APPID=aa61907de23846f2a309d33d56948612"
     response = requests.get(url)
     response = json.loads(response.text)
-    weather = response['weather'][0]['main']
-    return weather
+
+    if response['cod'] == 200:
+        weather = response['weather'][0]['main']
+        return weather
+    else:
+        return "err"
